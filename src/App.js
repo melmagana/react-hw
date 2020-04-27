@@ -3,6 +3,7 @@ import './App.css';
 import PlanetContainer from './PlanetContainer'
 
 function App() {
+  console.log(process.env)
   return (
     <div className="App">
       <PlanetContainer />
