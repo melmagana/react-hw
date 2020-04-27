@@ -25,12 +25,18 @@ export default class PlanetContainer extends Component {
 			console.log('retrievePlanetData:')
 			console.log(planetJson)
 
+			this.setState({
+				planets: planetJson.data
+			})
+
 		} catch (err) {
 			console.error('Error retrieving planet data')
 			console.error(err)
 		}
 	}
 	render() {
+		console.log('here is this.state in render() in PlanetContainer')
+		console.log(this.state)
 		return(
 			<div className="PlanetContainer">
 				<h2>Planet Container</h2>
