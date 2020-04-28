@@ -1,5 +1,5 @@
 import React from 'react'
-import {Card, Icon} from 'semantic-ui-react'
+import {Card, Button, Icon} from 'semantic-ui-react'
 
 export default function PlanetList(props) {
 	console.log('props in PlanetList')
@@ -22,6 +22,11 @@ export default function PlanetList(props) {
 				<Card.Content extra>
 					<Icon name="moon outline" />
 					{planet.moons}
+				</Card.Content>
+				<Card.Content>
+					<Button basic color='red' onClick={() => props.deletePlanet(planet.id)}>
+						Delete {planet.name}
+					</Button>
 				</Card.Content>
 			</Card>
 

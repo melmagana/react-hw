@@ -36,6 +36,29 @@ export default class PlanetContainer extends Component {
 			console.error(err)
 		}
 	}
+	deletePlanet = async (planetToDelete) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/planets/' + planetToDelete
+
+		try {
+			const deletePlanetResponse = await fetch(url, {
+				method: 'DELETE'
+			})
+			console.log('deletePlanetResponse', deletePlanetResponse)
+
+			const deletePlanetJson = await deletePlanetResponse.json()
+			console.log('deletePlanetJson',deletePlanetJson)
+
+			if(deletePlanetResponse.status === 200) {
+				this.setState({
+					planets: this.state.planets.filter(planet => planet.id !== planetToDelete)
+				})
+			}
+
+		} catch(err) {
+			console.error('Error deleting planet')
+			console.error(err)
+		}
+	}
 	addPlanet = async (planetToAdd) => {
 		console.log('here is the planet you are trying to add')
 		console.log(planetToAdd)
@@ -68,6 +91,7 @@ export default class PlanetContainer extends Component {
 			console.error(err)
 		}
 	}
+
 	render() {
 		// console.log('here is this.state in render() in PlanetContainer')
 		// console.log(this.state)
@@ -75,7 +99,7 @@ export default class PlanetContainer extends Component {
 			<div className="PlanetContainer">
 				<h2>Planet Cards</h2>
 				<NewPlanetForm addPlanet={this.addPlanet} />
-				<PlanetList planets={this.state.planets}/>
+				<PlanetList planets={this.state.planets} deletePlanet={this.deletePlanet}/>
 			</div>
 		)
 	}
