@@ -36,13 +36,37 @@ export default class PlanetContainer extends Component {
 			console.error(err)
 		}
 	}
+	addPlanet = async (planetToAdd) => {
+		console.log('here is the planet you are trying to add')
+		console.log(planetToAdd)
+
+		try{
+			const url = process.env.REACT_APP_API_URL + '/api/v1/planets/'
+			const addPlanetResponse = await fetch(url, {
+				method: 'POST',
+				body: JSON.stringify(planetToAdd),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			console.log('addPlanetResponse', addPlanetResponse)
+
+			const addPlanetJson = await addPlanetResponse.json()
+			console.log('here is what we get after trying to add planet:')
+			console.log(addPlanetJson)
+
+		} catch(err) {
+			console.error('Error adding planet')
+			console.error(err)
+		}
+	}
 	render() {
-		console.log('here is this.state in render() in PlanetContainer')
-		console.log(this.state)
+		// console.log('here is this.state in render() in PlanetContainer')
+		// console.log(this.state)
 		return(
 			<div className="PlanetContainer">
 				<h2>Planet Cards</h2>
-				<NewPlanetForm />
+				<NewPlanetForm addPlanet={this.addPlanet} />
 				<PlanetList planets={this.state.planets}/>
 			</div>
 		)
