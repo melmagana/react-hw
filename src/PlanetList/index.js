@@ -2,8 +2,8 @@ import React from 'react'
 import {Card, Button, Icon} from 'semantic-ui-react'
 
 export default function PlanetList(props) {
-	console.log('props in PlanetList')
-	console.log(props)
+	// console.log('props in PlanetList')
+	// console.log(props)
 
 	const planets = props.planets.map((planet) => {
 		return(

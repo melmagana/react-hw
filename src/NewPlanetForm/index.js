@@ -67,7 +67,7 @@ export default class NewPlanetForm extends Component {
 						placeholder='Number of Moons'
 						onChange={this.handleChange}
 					/>
-					<Button type='Submit' inverted color='purple'>
+					<Button type='Submit' inverted color='blue'>
         				Add Planet!
       				</Button>
 				</Form>

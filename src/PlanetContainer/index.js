@@ -118,10 +118,19 @@ export default class PlanetContainer extends Component {
 			const updatePlanetJson = await updatePlanetResponse.json()
 			console.log('updatePlanetJson', updatePlanetJson)
 
+			if(updatePlanetResponse.status === 200) {
+				const planets = this.state.planets
+				const idxUpdatedPlanet = planets.findIndex(planet => planet.id === this.state.planetToEdit)
+				planets[idxUpdatedPlanet] = updatePlanetJson.data
+
+				this.setState({
+					planets: planets,
+					planetToEdit: -1
+				})
+			}
 			this.setState({
 				planetToEdit: -1
 			})
-
 			this.retrievePlanetData()
 
 		} catch(err) {
@@ -135,9 +144,22 @@ export default class PlanetContainer extends Component {
 		return(
 			<div className="PlanetContainer">
 				<h2>Planet Cards</h2>
-				<NewPlanetForm addPlanet={this.addPlanet} />
-				<PlanetList planets={this.state.planets} deletePlanet={this.deletePlanet} editPlanet={this.editPlanet}/>
-				{this.state.planetToEdit !== -1 && <EditPlanetModal editingPlanet={this.state.planets.find((planet) => planet.id === this.state.planetToEdit)} updatePlanet={this.updatePlanet}/>}
+				<NewPlanetForm 
+					addPlanet={this.addPlanet} 
+				/>
+				<PlanetList 
+					planets={this.state.planets} 
+					deletePlanet={this.deletePlanet} 
+					editPlanet={this.editPlanet}
+				/>
+				{
+					this.state.planetToEdit !== -1 
+					&& 
+					<EditPlanetModal 
+						editingPlanet={this.state.planets.find((planet) => planet.id === this.state.planetToEdit)} 
+						updatePlanet={this.updatePlanet}
+					/>
+				}
 			</div>
 		)
 	}
