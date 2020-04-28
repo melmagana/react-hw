@@ -20,6 +20,13 @@ export default class NewPlanetForm extends Component {
 	handleSubmit = (event) => {
 		event.preventDefault()
 		this.props.addPlanet(this.state)
+
+		this.setState({
+			name: '',
+			planet_type: '',
+			length_of_year: '',
+			moons: ''
+		})
 	}
 	render() {
 		// console.log('this.state in render() in NewPlanetForm')

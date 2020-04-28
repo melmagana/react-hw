@@ -55,6 +55,14 @@ export default class PlanetContainer extends Component {
 			console.log('here is what we get after trying to add planet:')
 			console.log(addPlanetJson)
 
+			if(addPlanetResponse.status === 201) {
+				const planets = this.state.planets
+				planets.push(addPlanetJson.data)
+				this.setState({
+				planets: planets
+				})
+			}
+
 		} catch(err) {
 			console.error('Error adding planet')
 			console.error(err)
