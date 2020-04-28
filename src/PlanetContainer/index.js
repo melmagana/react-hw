@@ -102,6 +102,32 @@ export default class PlanetContainer extends Component {
 		})
 
 	}
+	updatePlanet = async (planetToUpdate) => {
+		const url = process.env.REACT_APP_API_URL + '/api/v1/planets/' + this.state.planetToEdit
+
+		try {
+			const updatePlanetResponse = await fetch(url, {
+				method: 'PUT',
+				body: JSON.stringify(planetToUpdate),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+			console.log('updatePlanetResponse', updatePlanetResponse)
+
+			const updatePlanetJson = await updatePlanetResponse.json()
+			console.log('updatePlanetJson', updatePlanetJson)
+
+			this.setState({
+				planetToEdit: -1
+			})
+
+			this.retrievePlanetData()
+
+		} catch(err) {
+			console.error('Error updating planet')
+		}
+	}
 
 	render() {
 		// console.log('here is this.state in render() in PlanetContainer')
@@ -111,7 +137,7 @@ export default class PlanetContainer extends Component {
 				<h2>Planet Cards</h2>
 				<NewPlanetForm addPlanet={this.addPlanet} />
 				<PlanetList planets={this.state.planets} deletePlanet={this.deletePlanet} editPlanet={this.editPlanet}/>
-				{this.state.planetToEdit !== -1 && <EditPlanetModal editingPlanet={this.state.planets.find((planet) => planet.id === this.state.planetToEdit)}/>}
+				{this.state.planetToEdit !== -1 && <EditPlanetModal editingPlanet={this.state.planets.find((planet) => planet.id === this.state.planetToEdit)} updatePlanet={this.updatePlanet}/>}
 			</div>
 		)
 	}

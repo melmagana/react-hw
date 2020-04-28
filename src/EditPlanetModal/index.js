@@ -19,11 +19,16 @@ export default class EditPlanetModal extends Component {
 			[event.target.name]: event.target.value
 		})
 	}
+	handleSubmit = (event) => {
+		event.preventDefault()
+
+		this.props.updatePlanet(this.state)
+	}
 	render() {
 		return (
 			<Segment>
 				<h3>Enter New Info</h3>
-				<Form>
+				<Form onSubmit={this.handleSubmit}>
 					<Label>Name</Label>
 					<Form.Input
 						type='text'
