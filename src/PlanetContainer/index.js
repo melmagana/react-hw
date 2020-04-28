@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import PlanetList from '../PlanetList'
+import NewPlanetForm from '../NewPlanetForm'
 
 export default class PlanetContainer extends Component {
 	constructor(props) {
@@ -41,6 +42,7 @@ export default class PlanetContainer extends Component {
 		return(
 			<div className="PlanetContainer">
 				<h2>Planet Cards</h2>
+				<NewPlanetForm />
 				<PlanetList planets={this.state.planets}/>
 			</div>
 		)
