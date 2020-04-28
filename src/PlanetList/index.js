@@ -24,8 +24,15 @@ export default function PlanetList(props) {
 					{planet.moons}
 				</Card.Content>
 				<Card.Content>
-					<Button basic color='red' onClick={() => props.deletePlanet(planet.id)}>
+					<Button basic color='red' 
+						onClick={() => props.deletePlanet(planet.id)}
+					>
 						Delete {planet.name}
+					</Button>
+					<Button basic color='yellow'
+						onClick={() => props.editPlanet(planet.id)}
+					>
+						Edit {planet.name}
 					</Button>
 				</Card.Content>
 			</Card>

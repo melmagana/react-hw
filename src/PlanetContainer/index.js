@@ -1,13 +1,15 @@
 import React, {Component} from 'react'
 import PlanetList from '../PlanetList'
 import NewPlanetForm from '../NewPlanetForm'
+import EditPlanetModal from '../EditPlanetModal'
 
 export default class PlanetContainer extends Component {
 	constructor(props) {
 		super(props)
 
 		this.state = {
-			planets: []
+			planets: [],
+			planetToEdit: -1
 		}
 	}
 	componentDidMount() {
@@ -91,6 +93,15 @@ export default class PlanetContainer extends Component {
 			console.error(err)
 		}
 	}
+	editPlanet = (planetToEdit) => {
+		console.log('here is what you get after trying to edit planet with id:')
+		console.log(planetToEdit)
+
+		this.setState({
+			planetToEdit: planetToEdit
+		})
+
+	}
 
 	render() {
 		// console.log('here is this.state in render() in PlanetContainer')
@@ -99,7 +110,8 @@ export default class PlanetContainer extends Component {
 			<div className="PlanetContainer">
 				<h2>Planet Cards</h2>
 				<NewPlanetForm addPlanet={this.addPlanet} />
-				<PlanetList planets={this.state.planets} deletePlanet={this.deletePlanet}/>
+				<PlanetList planets={this.state.planets} deletePlanet={this.deletePlanet} editPlanet={this.editPlanet}/>
+				{this.state.planetToEdit !== -1 && <EditPlanetModal editingPlanet={this.state.planets.find((planet) => planet.id === this.state.planetToEdit)}/>}
 			</div>
 		)
 	}
